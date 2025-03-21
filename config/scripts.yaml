@@ -1,0 +1,20 @@
+start_youtube_timer:
+  alias: "Starte YouTube Timer"
+  sequence:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.youtube_block
+    - service: timer.start
+      data:
+        entity_id: timer.youtube_timer
+        duration: "{{ '%02d:%02d:00' | format((states('input_number.youtube_duration') | int) // 60, (states('input_number.youtube_duration') | int) % 60) }}"
+
+cancel_and_toggle_youtube:
+  alias: "Cancel Timer and Toggle YouTube Block"
+  sequence:
+    - service: timer.cancel
+      data:
+        entity_id: timer.youtube_timer
+    - service: input_boolean.toggle
+      data:
+        entity_id: input_boolean.youtube_block

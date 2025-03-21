@@ -1,0 +1,12 @@
+- id: 'youtube_block_after_timer'
+  alias: "YouTube blockieren, wenn Timer abläuft"
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.youtube_timer
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.youtube_block
+  mode: single

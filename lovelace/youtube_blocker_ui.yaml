@@ -1,0 +1,56 @@
+type: vertical-stack
+cards:
+  - type: custom:button-card
+    entity: input_boolean.youtube_block
+    name: >
+      [[[ return entity.state === 'on' ? 'YouTube ist gesperrt' : 'YouTube ist entsperrt'; ]]]
+    label: >
+      [[[ return entity.state === 'on' ? 'Blockiert: 03:00 - 21:00 Uhr' : 'Entsperrt: 21:00 - 03:00 Uhr'; ]]]
+    icon: >
+      [[[ return entity.state === 'on' ? 'mdi:pause' : 'mdi:youtube'; ]]]
+    color: >
+      [[[ return entity.state === 'on' ? 'red' : 'green'; ]]]
+    styles:
+      card:
+        - border-radius: 15px
+        - padding: 16px
+        - box-shadow: 0px 4px 8px rgba(0,0,0,0.3)
+        - background-color: >
+            [[[ return entity.state === 'on' ? 'rgba(255,0,0,0.15)' : 'rgba(0,255,0,0.15)'; ]]]
+      name:
+        - font-size: 20px
+        - font-weight: bold
+      label:
+        - font-size: 16px
+    tap_action:
+      action: call-service
+      service: script.cancel_and_toggle_youtube
+
+  - type: entities
+    title: Timer-Status
+    entities:
+      - entity: timer.youtube_timer
+        name: "YouTube Timer"
+      - entity: input_number.youtube_duration
+        secondary_info: none
+    show_header_toggle: true
+    state_color: false
+
+  - type: custom:button-card
+    name: "Timer starten"
+    icon: mdi:timer-play
+    color: blue
+    styles:
+      card:
+        - border-radius: 15px
+        - padding: 12px
+        - box-shadow: 0px 4px 8px rgba(0,0,0,0.2)
+      name:
+        - font-size: 18px
+        - font-weight: bold
+      icon:
+        - width: 40px
+        - height: 40px
+    tap_action:
+      action: call-service
+      service: script.start_youtube_timer

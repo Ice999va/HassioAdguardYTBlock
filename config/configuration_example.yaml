@@ -1,1 +1,17 @@
+timer:
+  youtube_timer:
+    duration: '00:30:00'  # Wird durch das Skript überschrieben
+
+input_number:
+  youtube_duration:
+    name: "YouTube Entsperrzeit (Minuten)"
+    initial: 30
+    min: 1
+    max: 120
+    step: 1
+
+input_boolean:
+  youtube_block:
+    name: "YouTube Block"
+    initial: off
 
